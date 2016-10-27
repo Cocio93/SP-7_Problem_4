@@ -14,6 +14,22 @@
 
 <body ng-app="myApp" ng-controller="myController">
     <p ng-repeat="person in persons">{{person| lastFirst}}</p>
-<login-form header="This is a header"></login-form>
+<login-form header="Welcome"></login-form>
+<p><b>String in camelCase: </b>{{camelCase("Make something camel case")}}</p>
+<p><b>String in Title Case: </b>{{titleCase("Make something title case")}}</p>
+<p><b>String in dash-case: </b>{{dashCase("Make something dash case")}}</p>
+
+<div>
+    camelCase: <input ng-model="camelText" ng-init="camelText=' '">
+    <p>You entered: {{camelCase(camelText)}}</p>
+</div>
+<div>
+    Title Case: <input ng-model="titleText" ng-init="titleText=' '">
+    <p>You entered: {{titleCase(titleText)}}</p>
+</div>
+<div>
+    dash-case: <input ng-model="dashText" ng-init="dashText=' '">
+    <p>You entered: {{dashCase(dashText)}}</p>
+</div>
 </body>
 </html>

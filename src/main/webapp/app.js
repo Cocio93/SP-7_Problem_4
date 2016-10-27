@@ -2,8 +2,18 @@
 
 var app = angular.module('myApp', ['CustomFilterModule']);
 
-app.controller("myController", function ($scope, personFactory) {
+app.controller("myController", function ($scope, personFactory, caseService) {
     $scope.persons = personFactory.getPersons();
+    $scope.camelCase = function (string) {
+        return caseService.camelCase(string);
+    };
+    $scope.titleCase = function(string) {
+        return caseService.titleCase(string);
+    };
+    $scope.dashCase = function(string) {
+        return caseService.dashCase(string);
+    };
+    
 });
 
 app.factory('personFactory', function () {
@@ -41,4 +51,28 @@ app.directive('loginForm', function () {
 
 
     };
+});
+
+app.service("caseService", function () {
+    this.camelCase = function (string) {
+        return string.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
+            if (+match === 0)
+                return "";
+            return index == 0 ? match.toLowerCase() : match.toUpperCase();
+        });
+    };
+
+    this.titleCase = function (string) {
+        return string.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    };
+    
+    this.dashCase = function(string) {
+      string = string.toLowerCase();
+      var res = string.replace(/ /g, "-");
+      return res;
+    };
+    
+    
 });
