@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['CustomFilterModule']);
 
 app.controller("myController", function ($scope, personFactory) {
     $scope.persons = personFactory.getPersons();
@@ -13,17 +13,19 @@ app.factory('personFactory', function () {
     persons.push({firstName: 'Johnny', lastName: 'Hansen'});
     persons.push({firstName: 'Anders', lastName: 'Severinsen'});
     persons.push({firstName: 'Anne', lastName: 'Birgersen'});
-    
+
     return {
-        getPersons: function() {
+        getPersons: function () {
             return persons;
         }
     };
 
 });
 
-app.filter("lastFirst", function() {
-   return function(item) {
-       return item.lastName + ", " + item.firstName;
-   };
+var customFilterApp = angular.module('CustomFilterModule', []);
+
+customFilterApp.filter("lastFirst", function () {
+    return function (item) {
+        return item.lastName + ", " + item.firstName;
+    };
 });
