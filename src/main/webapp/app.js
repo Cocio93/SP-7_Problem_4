@@ -22,10 +22,23 @@ app.factory('personFactory', function () {
 
 });
 
+//1.
 var customFilterApp = angular.module('CustomFilterModule', []);
-
 customFilterApp.filter("lastFirst", function () {
     return function (item) {
         return item.lastName + ", " + item.firstName;
+    };
+});
+
+//2.
+app.directive('loginForm', function () {
+    return {
+        restrict: 'AE',
+        scope: {
+            header: '@header'
+        },
+        templateUrl: 'login-form.html'
+
+
     };
 });
